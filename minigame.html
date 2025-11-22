@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Love for Gurnoor 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffe6f2, #ffc6e0, #ffd6eb);
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 850px;
+  margin: auto;
+  box-shadow: 0 8px 25px rgba(255,105,180,0.3);
+}
+
+h1 {
+  color: #ff1493;
+  font-size: 2.8em;
+  text-shadow: 0 0 15px #ff69b4;
+}
+
+img.main-photo {
+  border-radius: 50%;
+  border: 6px solid #ff69b4;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  margin: 20px 0;
+}
+
+.links a {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 25px;
+  background: #ff69b4;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.game-section {
+  display: none;
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 20px;
+}
+
+#tapGame {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  margin: 20px 0;
+  background: linear-gradient(180deg, #fff0f5, #ffe0ed);
+  border-radius: 15px;
+}
+
+.heart {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+  from { bottom: -30px; opacity: 1; }
+  to { bottom: 260px; opacity: 0; }
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #ff1493;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+select {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  border: 1px solid pink;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1>To My Dearest Laado 💞</h1>
+<img src="reference.jpeg" class="main-photo">
+
+<p>This little world is made just for you 🤍</p>
+
+<div class="links">
+  <a href="#" onclick="startGame()">💖 Play Our Minigame</a>
+</div>
+
+<div class="game-section" id="game">
+
+<h2>💓 Tap To Calm My Heart</h2>
+<p>Take my stress away… tap the hearts until my heart calms 💗</p>
+<h3>Heartbeat: <span id="heartbeat">100</span>%</h3>
+
+<div id="tapGame"></div>
+
+<button onclick="startAfterWedding()">Continue Our Story 💍</button>
+
+<div id="afterWedding" style="display:none;">
+  <h2>🌸 After Our Wedding…</h2>
+  <p>Our first peaceful escape from the world… build it with me 💕</p>
+
+  <select id="place">
+    <option value="">Choose our place</option>
+    <option>Beach Walk 🌊</option>
+    <option>Rain Balcony 🌧️</option>
+    <option>European Cafe ☕</option>
+    <option>Fairy Lights Garden ✨</option>
+  </select>
+
+  <select id="mood">
+    <option value="">Choose our mood</option>
+    <option>Soft & Peaceful 🤍</option>
+    <option>Romantic & Cozy 💞</option>
+    <option>Dreamy & Magical 🌸</option>
+  </select>
+
+  <button onclick="finalDate()">Create Our Moment</button>
+
+  <h3 id="finalResult"></h3>
+</div>
+
+</div>
+</div>
+
+<script>
+let heartbeat = 100;
+
+function startGame() {
+  document.getElementById("game").style.display = "block";
+  startHearts();
+}
+
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 90 + "%";
+
+    heart.onclick = () => {
+      heartbeat -= 8;
+      if (heartbeat < 0) heartbeat = 0;
+      document.getElementById("heartbeat").innerText = heartbeat;
+      heart.remove();
+    };
+
+    document.getElementById("tapGame").appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }, 600);
+}
+
+function startAfterWedding() {
+  if (heartbeat <= 40) {
+    document.getElementById("afterWedding").style.display = "block";
+  } else {
+    alert("Calm my heart a little more baby… it's still beating fast 💓");
+  }
+}
+
+function finalDate() {
+  let place = document.getElementById("place").value;
+  let mood = document.getElementById("mood").value;
+
+  if (!place || !mood) {
+    alert("Choose everything first my love 💕");
+    return;
+  }
+
+  document.getElementById("finalResult").innerHTML = 
+  `After our wedding… we go for a <b>${place}</b>  
+  with a <b>${mood}</b> vibe.  
+  Me holding your hand, you resting on my shoulder.  
+  Just us against the world forever 💍🌸`;
+}
+</script>
+
+</body>
+</html>
